@@ -1,5 +1,6 @@
 package com.example.appprofile
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.appprofile.databinding.ActivityMainBinding
@@ -14,7 +15,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         updateUI()
         binding.tvLocation.setOnClickListener {
-            binding.tvLocation.text = "Lat: $lat Long: $long"
+            //binding.tvLocation.text = "Lat: $lat Long: $long"
+            startActivity(Intent(this, EditActivity::class.java))
         }
 
     }
