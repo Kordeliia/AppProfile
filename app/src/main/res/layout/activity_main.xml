@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/common_padding_default"
         android:paddingHorizontal="@dimen/common_padding_default"
         android:gravity="center_horizontal"
         android:orientation="vertical">
@@ -97,7 +98,7 @@
             android:textColor="@color/black"
             android:textStyle="italic"
             android:text="@string/main_show_map"
-            app:drawableEndCompat="@drawable/ic_location"
+            android:drawableEnd="@drawable/ic_location"
             />
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvAdjustLocation"
@@ -106,8 +107,8 @@
             android:textColor="@color/cardview_dark_background"
             android:textStyle="bold"
             android:text="@string/habilitar_location"
-            app:drawableStartCompat="@drawable/ic_settings"
-            android:layout_marginTop="@dimen/margin_min_default"
+            android:drawableStart="@drawable/ic_settings"
+            android:layout_marginTop="@dimen/margin_min_large"
             />
     </LinearLayout>
 </ScrollView>
