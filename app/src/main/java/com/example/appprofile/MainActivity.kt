@@ -43,7 +43,14 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.action_edit)
         {
-            startActivity(Intent(this, EditActivity::class.java))
+            val  intent : Intent = Intent(this, EditActivity::class.java)
+            intent.putExtra("k_name", binding.tvName.text)
+            intent.putExtra("k_email", binding.tvEmail.text)
+            intent.putExtra("k_website", binding.tvWebsite.text)
+            intent.putExtra("k_phone", binding.tvPhone.text)
+            intent.putExtra("k_lat", lat)
+            intent.putExtra("k_long", long)
+            startActivity(intent)
         }
         return super.onOptionsItemSelected(item)
     }

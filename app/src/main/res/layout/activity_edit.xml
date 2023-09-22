@@ -33,7 +33,7 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_img_search"
                 android:background="?selectableItemBackground"
-                />
+                android:contentDescription="Cambiar im de perfil" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -48,7 +48,7 @@
             app:boxCornerRadiusTopEnd="@dimen/common_padding_default"
             app:boxCornerRadiusTopStart="@dimen/common_padding_default">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tietName"
+                android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
@@ -66,7 +66,7 @@
             app:boxCornerRadiusTopEnd="@dimen/common_padding_default"
             app:boxCornerRadiusTopStart="@dimen/common_padding_default">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tietEmail"
+                android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textWebEditText"
@@ -84,7 +84,7 @@
             app:boxCornerRadiusTopEnd="@dimen/common_padding_default"
             app:boxCornerRadiusTopStart="@dimen/common_padding_default">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tietWeb"
+                android:id="@+id/etWebsite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
@@ -102,7 +102,7 @@
             app:boxCornerRadiusTopEnd="@dimen/common_padding_default"
             app:boxCornerRadiusTopStart="@dimen/common_padding_default">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tietPhone"
+                android:id="@+id/etPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="phone"
@@ -125,7 +125,7 @@
             app:boxCornerRadiusTopEnd="@dimen/common_padding_default"
             app:boxCornerRadiusTopStart="@dimen/common_padding_default">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tietLat"
+                android:id="@+id/etLat"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="numberDecimal|numberSigned"
@@ -142,11 +142,10 @@
             app:boxCornerRadiusTopEnd="@dimen/common_padding_default"
             app:boxCornerRadiusTopStart="@dimen/common_padding_default">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tietLong"
+                android:id="@+id/etLong"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="numberDecimal|numberSigned"
-                ime
                 />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
