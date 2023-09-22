@@ -8,4 +8,10 @@
     <string name="main_show_map">Ver en el mapa</string>
     <string name="habilitar_location">Habilitar localizacion</string>
     <string name="edit_title">Editar datos de usuario</string>
+    <string name="hint_nametil">Escribe tu nombre y apellidos</string>
+    <string name="hint_correotil">Escribe tu E-mail</string>
+    <string name="hint_webtil">Escribe el URL de tu página web</string>
+    <string name="hint_phonetil">Escribe tu número de teléfono</string>
+    <string name="hint_longtil">Longitud</string>
+    <string name="hint_lattil">Latitud</string>
 </resources>
