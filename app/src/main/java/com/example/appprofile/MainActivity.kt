@@ -6,6 +6,10 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.example.appprofile.databinding.ActivityMainBinding
+import androidx.activity.ComponentActivity
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -41,17 +45,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.action_edit)
-        {
-            val  intent : Intent = Intent(this, EditActivity::class.java)
+        if(item.itemId == R.id.action_edit) {
+            val intent: Intent = Intent(this, EditActivity::class.java)
             intent.putExtra(getString(R.string.key_nombre), binding.tvName.text)
             intent.putExtra(getString(R.string.key_email), binding.tvEmail.text)
             intent.putExtra(getString(R.string.key_website), binding.tvWebsite.text)
             intent.putExtra(getString(R.string.key_phone), binding.tvPhone.text)
             intent.putExtra(getString(R.string.key_latitud), lat)
             intent.putExtra(getString(R.string.key_longitud), long)
-            startActivity(intent)
+            val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+                    if (result.resultCode == RESULT_OK) {
+                        val intent = result.data
+                        val name = intent?.getStringExtra(getString(R.string.key_nombre))
+                        val email = intent?.getStringExtra(getString(R.string.key_email))
+                        val website = intent?.getStringExtra(getString(R.string.key_website))
+                        val phone = intent?.getStringExtra(getString(R.string.key_phone))
+                        lat = intent?.getDoubleExtra(getString(R.string.key_latitud), 0.0) ?: 0.0
+                        long = intent?.getDoubleExtra(getString(R.string.key_longitud), 0.0) ?: 0.0
+                    }
+                }
         }
         return super.onOptionsItemSelected(item)
     }
+
 }
