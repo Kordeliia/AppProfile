@@ -14,4 +14,10 @@
     <string name="hint_phonetil">Escribe tu número de teléfono</string>
     <string name="hint_longtil">Longitud</string>
     <string name="hint_lattil">Latitud</string>
+    <string name="key_nombre">k_name</string>
+    <string name="key_email">k_email</string>
+    <string name="key_website">k_website</string>
+    <string name="key_phone">k_phone</string>
+    <string name="key_latitud">k_lat</string>
+    <string name="key_longitud">k_long</string>
 </resources>
