@@ -31,10 +31,21 @@ class EditActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.menu_save)
         {
-            finish()
+            sendData()
         } else if (item.itemId == android.R.id.home){
             onBackPressedDispatcher.onBackPressed()
         }
         return super.onOptionsItemSelected(item)
+    }
+    fun sendData(){
+        val intent = Intent()
+        intent.putExtra(getString(R.string.key_nombre), binding.etName.text)
+        intent.putExtra(getString(R.string.key_email), binding.etEmail.text)
+        intent.putExtra(getString(R.string.key_website), binding.etWebsite.text)
+        intent.putExtra(getString(R.string.key_phone), binding.etPhone.text)
+        intent.putExtra(getString(R.string.key_latitud), binding.etLat.text.toString().toDouble())
+        intent.putExtra(getString(R.string.key_longitud), binding.etLong.text.toString().toDouble())
+        setResult(RESULT_OK, intent)
+        finish()
     }
 }
