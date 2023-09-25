@@ -16,12 +16,15 @@ class EditActivity : AppCompatActivity() {
         binding = ActivityEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.etName.setText(intent.extras?.getString("k_name"))
-        binding.etEmail.setText(intent.extras?.getString("k_email"))
-        binding.etWebsite.setText(intent.extras?.getString("k_website"))
-        binding.etPhone.setText(intent.extras?.getString("k_phone"))
-        binding.etLat.setText(intent.extras?.getDouble("k_lat").toString())
-        binding.etLong.setText(intent.extras?.getDouble("k_long").toString())
+        intent.extras?.let{
+            binding.etName.setText(it.getString("k_nombre"))
+            binding.etEmail.setText(it.getString("k_email"))
+            binding.etWebsite.setText(it.getString("k_website"))
+            binding.etPhone.setText(it.getString("k_phone"))
+            binding.etLat.setText(it.getDouble("k_latitud").toString())
+            binding.etLong.setText(it.getDouble("k_longitud").toString())
+        }
+
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_edit, menu)
@@ -29,22 +32,26 @@ class EditActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.menu_save)
-        {
-            sendData()
-        } else if (item.itemId == android.R.id.home){
-            onBackPressedDispatcher.onBackPressed()
+        when(item.itemId){
+            R.id.menu_save -> sendData()
+            android.R.id.home -> onBackPressedDispatcher.onBackPressed()
         }
         return super.onOptionsItemSelected(item)
     }
     fun sendData(){
         val intent = Intent()
-        intent.putExtra(getString(R.string.key_nombre), binding.etName.text)
-        intent.putExtra(getString(R.string.key_email), binding.etEmail.text)
-        intent.putExtra(getString(R.string.key_website), binding.etWebsite.text)
-        intent.putExtra(getString(R.string.key_phone), binding.etPhone.text)
-        intent.putExtra(getString(R.string.key_latitud), binding.etLat.text.toString().toDouble())
-        intent.putExtra(getString(R.string.key_longitud), binding.etLong.text.toString().toDouble())
+        with(binding){
+            intent.apply{
+                putExtra("k_nombre", etName.text.toString())
+                putExtra("k_email", etEmail.text.toString())
+                putExtra("k_website", etWebsite.text.toString())
+                putExtra("k_phone", etPhone.text.toString())
+                putExtra("k_latitud", etLat.text.toString().toDouble())
+                putExtra("k_longitud", etLong.text.toString().toDouble())
+            }
+
+        }
+
         setResult(RESULT_OK, intent)
         finish()
     }
