@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
+import android.widget.Toast
 import com.example.appprofile.databinding.ActivityMainBinding
 import androidx.activity.result.contract.ActivityResultContracts
 
@@ -21,10 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         updateUI()
         setupIntents()
-        binding.tvLocation.setOnClickListener {
-            binding.tvLocation.text = "Lat: $lat Long: $long"
 
-        }
         binding.tvEmail.setOnClickListener {
             val intent = Intent(Intent.ACTION_SENDTO).apply {
                 data = Uri.parse("mailto:")
@@ -32,9 +31,34 @@ class MainActivity : AppCompatActivity() {
                 putExtra(Intent.EXTRA_SUBJECT, "Prueba Android Nuncha App")
                 putExtra(Intent.EXTRA_TEXT, "Desde la app Profile de Nunchakita.")
             }
-            startActivity(intent)
+            launchIntent(intent)
         }
-
+        binding.tvWebsite.setOnClickListener {
+            val webPage = Uri.parse(binding.tvWebsite.text.toString())
+            val intent = Intent(Intent.ACTION_VIEW, webPage)
+            launchIntent(intent)
+        }
+        binding.tvPhone.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL).apply {
+                val phone = (it as TextView).text
+                data = Uri.parse("tel:$phone")
+            }
+            launchIntent(intent)
+        }
+        binding.tvLocation.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse("geo:0,0?q=$lat, $long(App Profile Nuncha)")
+                `package` = "com.google.android.apps.maps"
+            }
+            launchIntent(intent)
+        }
+    }
+    private fun launchIntent(intent: Intent){
+        if(intent.resolveActivity(packageManager) != null){
+            startActivity(intent)
+        }else{
+            Toast.makeText(this, getString(R.string.ToastMsgNoCompatibilidad), Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setupIntents() {
@@ -48,8 +72,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateUI(name: String = "Laura Alvarez Muñoz",
                          email: String = "lalvmun@gmail.com",
-                         website : String ="miwebsite.nunchakita.com",
-                         phone : String = "+34622321232") {
+                         website : String ="https://www.linkedin.com/in/laura-%C3%A1lvarez-mu%C3%B1oz-165749209/",
+                         phone : String = "+34622321232",
+                         lat: Double =37.0,
+                         long: Double = -122.0) {
         binding.tvName.text = name
         binding.tvEmail.text = email
         binding.tvWebsite.text = website
@@ -85,7 +111,7 @@ class MainActivity : AppCompatActivity() {
                 val phone = it.data?.getStringExtra(getString(R.string.key_phone))
                 lat = it.data?.getDoubleExtra(getString(R.string.key_latitud), 0.0) ?: 0.0
                 long = it.data?.getDoubleExtra(getString(R.string.key_longitud), 0.0) ?: 0.0
-                updateUI(name!!, email!!, website!!, phone!!)
+                updateUI(name!!, email!!, website!!, phone!!, lat!!, long!!)
         }
     }
 }

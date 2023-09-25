@@ -76,6 +76,7 @@
             android:textStyle="italic"
             tools:text="mi.pagina.web.domain"
             android:autoLink="web"
+            android:linksClickable="false"
             />
         <TextView
             android:layout_width="wrap_content"
