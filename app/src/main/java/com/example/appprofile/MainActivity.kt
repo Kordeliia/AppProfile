@@ -1,5 +1,6 @@
 package com.example.appprofile
 
+import android.app.SearchManager
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,11 +19,21 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         updateUI()
+        setupIntents()
         binding.tvLocation.setOnClickListener {
             binding.tvLocation.text = "Lat: $lat Long: $long"
 
         }
 
+    }
+
+    private fun setupIntents() {
+        binding.tvName.setOnClickListener {
+            val intent = Intent(Intent.ACTION_WEB_SEARCH).apply{
+                putExtra(SearchManager.QUERY, binding.tvName.text)
+            }
+            startActivity(intent)
+        }
     }
 
     private fun updateUI(name: String = "Laura Alvarez Muñoz",
