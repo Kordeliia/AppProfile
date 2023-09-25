@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
@@ -17,6 +18,19 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var lat : Double = 0.0
     private var long: Double = 0.0
+    private var imgUri: Uri? = null
+    private val editResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        if (it.resultCode == RESULT_OK) {
+            imgUri = Uri.parse(it.data?.getStringExtra("k_image"))
+            val name = it.data?.getStringExtra("k_nombre")
+            val email = it.data?.getStringExtra("k_email")
+            val website = it.data?.getStringExtra("k_website")
+            val phone = it.data?.getStringExtra("k_phone")
+            lat = it.data?.getDoubleExtra("k_latitud", 0.0) ?: 0.0
+            long = it.data?.getDoubleExtra("k_longitud", 0.0) ?: 0.0
+            updateUI(name!!, email!!, website!!, phone!!)
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -39,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             launchIntent(intent)
         }
         binding.tvPhone.setOnClickListener {
-            val intent = Intent(Intent.ACTION_DIAL).apply {
+            val intent = Intent(Intent.ACTION_CALL).apply { // Tarea: Llamar
                 val phone = (it as TextView).text
                 data = Uri.parse("tel:$phone")
             }
@@ -52,6 +66,11 @@ class MainActivity : AppCompatActivity() {
             }
             launchIntent(intent)
         }
+        binding.tvSettings.setOnClickListener {
+            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+            launchIntent(intent)
+        }
+
     }
     private fun launchIntent(intent: Intent){
         if(intent.resolveActivity(packageManager) != null){
@@ -73,15 +92,13 @@ class MainActivity : AppCompatActivity() {
     private fun updateUI(name: String = "Laura Alvarez Muñoz",
                          email: String = "lalvmun@gmail.com",
                          website : String ="https://www.linkedin.com/in/laura-%C3%A1lvarez-mu%C3%B1oz-165749209/",
-                         phone : String = "+34622321232",
-                         lat: Double =37.0,
-                         long: Double = -122.0) {
+                         phone : String = "+34622321232") {
+        binding.imgProfile.setImageURI(imgUri)
         binding.tvName.text = name
         binding.tvEmail.text = email
         binding.tvWebsite.text = website
         binding.tvPhone.text = phone
-      //  lat = 37.7448
-      //  long = -1.1951
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -98,20 +115,11 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(getString(R.string.key_phone), binding.tvPhone.text)
             intent.putExtra(getString(R.string.key_latitud), lat)
             intent.putExtra(getString(R.string.key_longitud), long)
+            intent.putExtra(getString(R.string.key_image), imgUri.toString())
             editResult.launch(intent)
           //  startActivityForResult(intent, RC_EDIT)
         }
         return super.onOptionsItemSelected(item)
     }
-    private val editResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-        if (it.resultCode == RESULT_OK) {
-                val name = it.data?.getStringExtra(getString(R.string.key_nombre))
-                val email = it.data?.getStringExtra(getString(R.string.key_email))
-                val website = it.data?.getStringExtra(getString(R.string.key_website))
-                val phone = it.data?.getStringExtra(getString(R.string.key_phone))
-                lat = it.data?.getDoubleExtra(getString(R.string.key_latitud), 0.0) ?: 0.0
-                long = it.data?.getDoubleExtra(getString(R.string.key_longitud), 0.0) ?: 0.0
-                updateUI(name!!, email!!, website!!, phone!!, lat!!, long!!)
-        }
-    }
+
 }
