@@ -2,6 +2,7 @@ package com.example.appprofile
 
 import android.app.SearchManager
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -23,6 +24,15 @@ class MainActivity : AppCompatActivity() {
         binding.tvLocation.setOnClickListener {
             binding.tvLocation.text = "Lat: $lat Long: $long"
 
+        }
+        binding.tvEmail.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:")
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(binding.tvEmail.text.toString()))
+                putExtra(Intent.EXTRA_SUBJECT, "Prueba Android Nuncha App")
+                putExtra(Intent.EXTRA_TEXT, "Desde la app Profile de Nunchakita.")
+            }
+            startActivity(intent)
         }
 
     }

@@ -60,6 +60,7 @@
             android:textStyle="italic"
             tools:text="Nunchakita@gmail.com"
             android:autoLink="email"
+            android:linksClickable="false"
             />
         <TextView
             android:layout_width="wrap_content"
