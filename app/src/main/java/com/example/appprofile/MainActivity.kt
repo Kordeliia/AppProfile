@@ -46,8 +46,8 @@ class MainActivity : AppCompatActivity() {
         if (item.itemId == R.id.action_edit) {
             val intent = Intent(this, EditActivity::class.java)
             intent.putExtra(getString(R.string.key_nombre), binding.tvName.text)
-            intent.putExtra(getString(R.string.key_email), binding.tvEmail.text)
-            intent.putExtra(getString(R.string.key_website), binding.tvWebsite.text)
+            intent.putExtra(getString(R.string.key_email), binding.tvEmail.text.toString())
+            intent.putExtra(getString(R.string.key_website), binding.tvWebsite.text.toString())
             intent.putExtra(getString(R.string.key_phone), binding.tvPhone.text)
             intent.putExtra(getString(R.string.key_latitud), lat)
             intent.putExtra(getString(R.string.key_longitud), long)

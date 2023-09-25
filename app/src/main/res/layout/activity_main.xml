@@ -59,6 +59,7 @@
             android:textColor="@color/black"
             android:textStyle="italic"
             tools:text="Nunchakita@gmail.com"
+            android:autoLink="email"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -73,6 +74,7 @@
             android:textColor="@color/black"
             android:textStyle="italic"
             tools:text="mi.pagina.web.domain"
+            android:autoLink="web"
             />
         <TextView
             android:layout_width="wrap_content"
