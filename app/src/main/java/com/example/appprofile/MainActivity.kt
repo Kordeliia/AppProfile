@@ -45,12 +45,12 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_edit) {
             val intent = Intent(this, EditActivity::class.java)
-            intent.putExtra("k_nombre", binding.tvName.text)
-            intent.putExtra("k_email", binding.tvEmail.text)
-            intent.putExtra("k_website", binding.tvWebsite.text)
-            intent.putExtra("k_phone", binding.tvPhone.text)
-            intent.putExtra("k_latitud", lat)
-            intent.putExtra("k_longitud", long)
+            intent.putExtra(getString(R.string.key_nombre), binding.tvName.text)
+            intent.putExtra(getString(R.string.key_email), binding.tvEmail.text)
+            intent.putExtra(getString(R.string.key_website), binding.tvWebsite.text)
+            intent.putExtra(getString(R.string.key_phone), binding.tvPhone.text)
+            intent.putExtra(getString(R.string.key_latitud), lat)
+            intent.putExtra(getString(R.string.key_longitud), long)
             editResult.launch(intent)
           //  startActivityForResult(intent, RC_EDIT)
         }

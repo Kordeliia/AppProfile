@@ -16,15 +16,33 @@ class EditActivity : AppCompatActivity() {
         binding = ActivityEditBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        intent.extras?.let{
-            binding.etName.setText(it.getString("k_nombre"))
-            binding.etEmail.setText(it.getString("k_email"))
-            binding.etWebsite.setText(it.getString("k_website"))
-            binding.etPhone.setText(it.getString("k_phone"))
-            binding.etLat.setText(it.getDouble("k_latitud").toString())
-            binding.etLong.setText(it.getDouble("k_longitud").toString())
+        with(binding){
+            intent.extras?.let{
+                etName.setText(it.getString(getString(R.string.key_nombre)))
+                etEmail.setText(it.getString(getString(R.string.key_email)))
+                etWebsite.setText(it.getString(getString(R.string.key_website)))
+                etPhone.setText(it.getString(getString(R.string.key_phone)))
+                etLat.setText(it.getDouble(getString(R.string.key_latitud)).toString())
+                etLong.setText(it.getDouble(getString(R.string.key_longitud)).toString())
+            }
+            etEmail.setOnFocusChangeListener{view, isFocused ->
+                if(isFocused){ etEmail.text?.let{ etEmail.setSelection(it.length) } }
+            }
+            etWebsite.setOnFocusChangeListener { view, isFocused ->
+                if (isFocused) {
+                    etWebsite.text?.let { etWebsite.setSelection(it.length) } }
+            }
+            etPhone.setOnFocusChangeListener { view, isFocused ->
+                if (isFocused) {
+                    etPhone.text?.let { etPhone.setSelection(it.length) } }
+            }
+            etLat.setOnFocusChangeListener{view, isFocused ->
+                if(isFocused){ etLat.text?.let{ etLat.setSelection(it.length) } }
+            }
+            etLong.setOnFocusChangeListener{view, isFocused ->
+                if(isFocused){ etLong.text?.let{ etLong.setSelection(it.length) } }
+            }
         }
-
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_edit, menu)
@@ -49,9 +67,7 @@ class EditActivity : AppCompatActivity() {
                 putExtra("k_latitud", etLat.text.toString().toDouble())
                 putExtra("k_longitud", etLong.text.toString().toDouble())
             }
-
         }
-
         setResult(RESULT_OK, intent)
         finish()
     }

@@ -106,6 +106,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="phone"
+                android:imeOptions="actionNext"
+                android:nextFocusForward="@id/etLat"
                 />
         </com.google.android.material.textfield.TextInputLayout>
         <LinearLayout
@@ -123,12 +125,16 @@
             app:boxCornerRadiusBottomEnd="@dimen/common_padding_default"
             app:boxCornerRadiusBottomStart="@dimen/common_padding_default"
             app:boxCornerRadiusTopEnd="@dimen/common_padding_default"
-            app:boxCornerRadiusTopStart="@dimen/common_padding_default">
+            app:boxCornerRadiusTopStart="@dimen/common_padding_default"
+            >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etLat"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="numberDecimal|numberSigned"
+                android:imeOptions="actionNext"
+                android:nextFocusForward="@id/etLong"
+
                 />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
