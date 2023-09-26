@@ -14,6 +14,7 @@ import android.widget.Toast
 import com.example.appprofile.databinding.ActivityMainBinding
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.edit
+import androidx.core.view.updateLayoutParams
 import androidx.preference.PreferenceManager
 
 
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+
         getUserData()
         setupIntents()
 
@@ -58,7 +60,7 @@ class MainActivity : AppCompatActivity() {
             launchIntent(intent)
         }
         binding.tvPhone.setOnClickListener {
-            val intent = Intent(Intent.ACTION_CALL).apply { // Tarea: Llamar
+            val intent = Intent(Intent.ACTION_DIAL).apply { // Tarea: Llamar
                 val phone = (it as TextView).text
                 data = Uri.parse("tel:$phone")
             }
@@ -76,6 +78,40 @@ class MainActivity : AppCompatActivity() {
             launchIntent(intent)
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        refreshSettingsPreferences()
+    }
+
+    private fun refreshSettingsPreferences() {
+        val isEnabled =
+            sharedPreferences.getBoolean(getString(R.string.preferences_key_enable_clicks), true)
+        with(binding) {
+            tvName.isEnabled = isEnabled
+            tvEmail.isEnabled = isEnabled
+            tvWebsite.isEnabled = isEnabled
+            tvPhone.isEnabled = isEnabled
+            tvLocation.isEnabled = isEnabled
+            tvSettings.isEnabled = isEnabled
+        }
+        val imagSize = sharedPreferences.getString(getString(R.string.preferences_ui_img_size_key), "")
+        val sizeValue = when(imagSize){
+            getString(R.string.preferences_img_size_small_key) -> {
+                resources.getDimensionPixelSize(R.dimen.profile_img_size_small)
+            }
+            getString(R.string.preferences_img_size_medium_key) -> {
+                resources.getDimensionPixelSize(R.dimen.profile_img_size_medium)
+            }
+            else -> {
+                resources.getDimensionPixelSize(R.dimen.profile_img_size_large)
+            }
+        }
+        binding.imgProfile.updateLayoutParams{
+            width = sizeValue
+            height = sizeValue
+        }
     }
 
     private fun saveUserData(name: String?, email: String?, website: String?, phone: String?) {
