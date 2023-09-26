@@ -6,17 +6,26 @@
     <SwitchPreferenceCompat
         app:title="@string/preferences_enable_clicks"
         app:key="@string/preferences_key_enable_clicks"
-        android:defaultValue="true"/>
+        app:defaultValue="true"/>
 </PreferenceCategory>
+    <PreferenceCategory
+        app:title="@string/preferences_ui_title">
+        <ListPreference
+            app:title="@string/preferences_ui_img_size"
+            app:key="@string/preferences_ui_img_size_key"
+            app:entries="@array/sizes"
+            android:entryValues="@array/sizes_values"
+            app:defaultValue="@string/preferences_img_size_large_key"/>
+    </PreferenceCategory>
     <PreferenceCategory
         app:title="@string/preferences_data_title">
         <Preference
             app:title="@string/preferences_delete_data"
             app:key="@string/preferences_key_delete_data"
-            android:defaultValue="true"/>
+            />
         <Preference
             app:title="@string/preferences_restore_data"
             app:key="@string/preferences_key_restore_data"
-            android:defaultValue="true"/>
+            />
     </PreferenceCategory>
 </PreferenceScreen>

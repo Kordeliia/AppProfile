@@ -32,4 +32,13 @@
     <string name="preferences_key_delete_data">pref_delete_data</string>
     <string name="preferences_restore_data">Restaurar datos de usuario y configuraciones</string>
     <string name="preferences_key_restore_data">pref_restore_data</string>
+    <string name="preferences_img_size_small">Pequeña</string>
+    <string name="preferences_img_size_medium">Mediana</string>
+    <string name="preferences_img_size_large">Grande</string>
+    <string name="preferences_img_size_small_key">pref_small</string>
+    <string name="preferences_img_size_medium_key">pref_medium</string>
+    <string name="preferences_img_size_large_key">pref_large</string>
+    <string name="preferences_ui_title">Interfaz</string>
+    <string name="preferences_ui_img_size">Tamaño de la imagen</string>
+    <string name="preferences_ui_img_size_key">pref_ui_img_size</string>
 </resources>
