@@ -2,6 +2,7 @@ package com.example.appprofile
 
 import android.app.SearchManager
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,13 +13,16 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.appprofile.databinding.ActivityMainBinding
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.edit
+import androidx.preference.PreferenceManager
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var sharedPreferences : SharedPreferences
+    private lateinit var imgUri: Uri
     private var lat : Double = 0.0
     private var long: Double = 0.0
-    private var imgUri: Uri? = null
     private val editResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
         if (it.resultCode == RESULT_OK) {
             imgUri = Uri.parse(it.data?.getStringExtra("k_image"))
@@ -28,14 +32,15 @@ class MainActivity : AppCompatActivity() {
             val phone = it.data?.getStringExtra("k_phone")
             lat = it.data?.getDoubleExtra("k_latitud", 0.0) ?: 0.0
             long = it.data?.getDoubleExtra("k_longitud", 0.0) ?: 0.0
-            updateUI(name!!, email!!, website!!, phone!!)
+            saveUserData(name, email, website, phone)
         }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        updateUI()
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        getUserData()
         setupIntents()
 
         binding.tvEmail.setOnClickListener {
@@ -72,6 +77,21 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+    private fun saveUserData(name: String?, email: String?, website: String?, phone: String?) {
+        sharedPreferences.edit {
+            putString(getString(R.string.key_image), imgUri.toString())
+            putString(getString(R.string.key_nombre), name)
+            putString(getString(R.string.key_email), email)
+            putString(getString(R.string.key_website), website)
+            putString(getString(R.string.key_phone), phone)
+            putString(getString(R.string.key_latitud), lat.toString())
+            putString(getString(R.string.key_longitud), long.toString())
+            apply()
+        }
+        updateUI(name, email, website, phone)
+    }
+
     private fun launchIntent(intent: Intent){
         if(intent.resolveActivity(packageManager) != null){
             startActivity(intent)
@@ -88,17 +108,24 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
-    private fun updateUI(name: String = "Laura Alvarez Muñoz",
-                         email: String = "lalvmun@gmail.com",
-                         website : String ="https://www.linkedin.com/in/laura-%C3%A1lvarez-mu%C3%B1oz-165749209/",
-                         phone : String = "+34622321232") {
-        binding.imgProfile.setImageURI(imgUri)
-        binding.tvName.text = name
-        binding.tvEmail.text = email
-        binding.tvWebsite.text = website
-        binding.tvPhone.text = phone
-
+    private fun getUserData() {
+        imgUri = Uri.parse(sharedPreferences.getString("k_image", ""))
+        val name = sharedPreferences.getString("k_nombre", null)
+        val email = sharedPreferences.getString("k_email", null)
+        val website = sharedPreferences.getString("k_website", null)
+        val phone = sharedPreferences.getString("k_phone", null)
+        lat = sharedPreferences.getString("k_latitud", "0.0")!!.toDouble()
+        long = sharedPreferences.getString("k_longitud", "0.0")!!.toDouble()
+        updateUI(name, email, website, phone)
+    }
+    private fun updateUI(name: String?, email: String?, website : String?, phone : String?) {
+        with(binding){
+            binding.imgProfile.setImageURI(imgUri)
+            binding.tvName.text = name ?: "Laura Alvarez Muñoz"
+            binding.tvEmail.text = email ?: "lalvmun@gmail.com"
+            binding.tvWebsite.text = website ?: "https://www.linkedin.com/in/laura-%C3%A1lvarez-mu%C3%B1oz-165749209/"
+            binding.tvPhone.text = phone ?: "+34632323232"
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
