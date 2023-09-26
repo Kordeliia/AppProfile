@@ -5,22 +5,28 @@
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
+
     <queries>
         <intent>
-            <action android:name="android.intent.action.DIAL"/>
+            <action android:name="android.intent.action.DIAL" />
         </intent>
         <intent>
-            <action android:name="android.intent.action.VIEW"/>
-            <data android:scheme="https"/>
-            <category android:name="android.intent.category.BROWSABLE"/>
+            <action android:name="android.intent.action.VIEW" />
+
+            <data android:scheme="https" />
+
+            <category android:name="android.intent.category.BROWSABLE" />
         </intent>
         <intent>
-            <action android:name="android.intent.action.SENDTO"/>
-            <data android:scheme="*"/>
+            <action android:name="android.intent.action.SENDTO" />
+
+            <data android:scheme="*" />
         </intent>
-        <package android:name="com.google.android.apps.maps"/>
-        <!--Tarea: Llamar-->
+
+        <package android:name="com.google.android.apps.maps" />
+        <!-- Tarea: Llamar -->
     </queries>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -32,9 +38,13 @@
         android:theme="@style/Theme.AppProfile"
         tools:targetApi="31">
         <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:label="@string/settings_titlee" />
+        <activity
             android:name=".EditActivity"
             android:exported="false"
-            android:label="@string/edit_title"/>
+            android:label="@string/edit_title" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

@@ -134,17 +134,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_edit) {
-            val intent = Intent(this, EditActivity::class.java)
-            intent.putExtra(getString(R.string.key_nombre), binding.tvName.text)
-            intent.putExtra(getString(R.string.key_email), binding.tvEmail.text.toString())
-            intent.putExtra(getString(R.string.key_website), binding.tvWebsite.text.toString())
-            intent.putExtra(getString(R.string.key_phone), binding.tvPhone.text)
-            intent.putExtra(getString(R.string.key_latitud), lat)
-            intent.putExtra(getString(R.string.key_longitud), long)
-            intent.putExtra(getString(R.string.key_image), imgUri.toString())
-            editResult.launch(intent)
-          //  startActivityForResult(intent, RC_EDIT)
+        when(item.itemId){
+            R.id.action_edit ->{
+                val intent = Intent(this, EditActivity::class.java)
+                intent.putExtra(getString(R.string.key_nombre), binding.tvName.text)
+                intent.putExtra(getString(R.string.key_email), binding.tvEmail.text.toString())
+                intent.putExtra(getString(R.string.key_website), binding.tvWebsite.text.toString())
+                intent.putExtra(getString(R.string.key_phone), binding.tvPhone.text)
+                intent.putExtra(getString(R.string.key_latitud), lat)
+                intent.putExtra(getString(R.string.key_longitud), long)
+                intent.putExtra(getString(R.string.key_image), imgUri.toString())
+                editResult.launch(intent)
+            }
+            R.id.action_settings -> startActivity(Intent(this, SettingsActivity::class.java))
         }
         return super.onOptionsItemSelected(item)
     }

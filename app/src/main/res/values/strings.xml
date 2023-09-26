@@ -22,4 +22,6 @@
     <string name="key_longitud">k_longitud</string>
     <string name="ToastMsgNoCompatibilidad">No se encontró compatibilidad con la app.</string>
     <string name="key_image">k_image</string>
+    <string name="settings_title">Configuración</string>
+    <string name="settings_titlee">Settings</string>
 </resources>
