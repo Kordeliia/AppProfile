@@ -27,5 +27,9 @@
             app:title="@string/preferences_restore_data"
             app:key="@string/preferences_key_restore_data"
             />
+        <Preference
+            app:title="@string/preferences_restore_settings"
+            app:key="@string/preferences_key_restore_settings"
+            />
     </PreferenceCategory>
 </PreferenceScreen>

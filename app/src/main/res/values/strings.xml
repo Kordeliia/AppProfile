@@ -32,6 +32,8 @@
     <string name="preferences_key_delete_data">pref_delete_data</string>
     <string name="preferences_restore_data">Restaurar datos de usuario y configuraciones</string>
     <string name="preferences_key_restore_data">pref_restore_data</string>
+    <string name="preferences_restore_settings">Restaurar configuraciones</string>
+    <string name="preferences_key_restore_settings">pref_restore_conf</string>
     <string name="preferences_img_size_small">Pequeña</string>
     <string name="preferences_img_size_medium">Mediana</string>
     <string name="preferences_img_size_large">Grande</string>

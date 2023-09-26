@@ -112,6 +112,7 @@ class MainActivity : AppCompatActivity() {
             width = sizeValue
             height = sizeValue
         }
+        getUserData()
     }
 
     private fun saveUserData(name: String?, email: String?, website: String?, phone: String?) {
@@ -145,7 +146,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun getUserData() {
-        imgUri = Uri.parse(sharedPreferences.getString("k_image", ""))
+        imgUri = Uri.parse(sharedPreferences.getString("k_image", "@drawable/cursos_android_ant.jpg"))
         val name = sharedPreferences.getString("k_nombre", null)
         val email = sharedPreferences.getString("k_email", null)
         val website = sharedPreferences.getString("k_website", null)
@@ -157,10 +158,10 @@ class MainActivity : AppCompatActivity() {
     private fun updateUI(name: String?, email: String?, website : String?, phone : String?) {
         with(binding){
             binding.imgProfile.setImageURI(imgUri)
-            binding.tvName.text = name ?: "Laura Alvarez Muñoz"
-            binding.tvEmail.text = email ?: "lalvmun@gmail.com"
-            binding.tvWebsite.text = website ?: "https://www.linkedin.com/in/laura-%C3%A1lvarez-mu%C3%B1oz-165749209/"
-            binding.tvPhone.text = phone ?: "+34632323232"
+            binding.tvName.text = name ?: "Nombre de usuario (y apellidos)"
+            binding.tvEmail.text = email ?: "tucorreoelectronico@dominio.com"
+            binding.tvWebsite.text = website ?: "www.tupaginaweb.dominio"
+            binding.tvPhone.text = phone ?: "+34622222222"
         }
     }
 
